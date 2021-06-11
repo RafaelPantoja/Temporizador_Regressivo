@@ -1,0 +1,95 @@
+    
+<html>
+<head>
+<title>Projeto Cronometro - javaScript</title></heady>
+<style>
+    .container {
+       text-align: center;
+
+    }
+        button {
+ 
+         background-color: blue#069;
+         color:rgb(216, 16, 16);
+         front-size: 32px;
+         padding: 8px 20px;
+         cursor: pointer;
+      
+        }
+
+
+</style>
+</head>
+
+
+
+<body>
+<audio id="sound" src="beep-01a.mp3" style="display: nome;"></audio>
+
+<div class="container">
+    <h2>Minutos:</h2>
+    <select id="minutos" nome="minutos"></select>
+
+    <h2>Segundos:</h2>
+    <select id="segundos" nome="segundos"></select>
+    <br/>
+    <br/>
+    <button id="começar">comecar</button>
+    <div id="display">
+        <h3> 00:00:00</h3>
+    
+
+<script>
+var display=document.getElementById('display');
+
+
+var minutos=document.getElementById('minutos');
+var segundos=document.getElementById('segundos');
+
+var começar=document.getElementById('começar');
+
+var CronometroSeg;
+
+var minutosAtual;
+var segundosAtual;
+
+var interval;
+
+for(var i = 0; i <= 60; i++){
+     minutos.innerHTML+='<option value="'+i+'"> '+i+'</option>';
+}
+for(var i = 1; i <= 60; i++){
+     segundos.innerHTML+='<option value="'+i+'"> '+i+'</option>';
+}
+
+começar.addEventListener('click',function(){
+    minutoAtual = minutos.value;
+    segundoAtual = segundos.value;
+    display.childNodes[1].innerHTML = minutoAtual + ":"+segundoAtual;
+    interval = setInterval(function(){
+
+        segundoAtual--;
+        if(segundoAtual <=0){
+            if (minutoAtual > 0){
+                minutoAtual--;
+                segundoAtual = 59;
+            }else{   
+                alert("Acabou!");
+                document.getElementById("sound").play();
+                clearInterval(interval);
+
+
+            }
+        }
+                
+            display.childNodes[1].innerHTML = minutoAtual + ":"+segundoAtual;
+    },1000); 
+    
+    })
+        
+</Script>
+
+
+</body>
+
+</html>
